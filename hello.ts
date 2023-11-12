@@ -1,8 +1,10 @@
-import OpenAI from "openai";
+import OpenAI from "npm:openai";
 
 console.log("hello");
 
-const openai = new OpenAI({}); // Load API Key from env by default
+const openai = new OpenAI({
+  apiKey: Deno.env.get("OPENAI_API_KEY"),
+});
 
 async function main() {
   const chatCompletion = await openai.chat.completions.create({
