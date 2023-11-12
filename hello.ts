@@ -59,11 +59,13 @@ async function main() {
         parameters: {
           type: "object",
           properties: {
-            type: "string",
-            description: "sport",
+            name: {
+              type: "string",
+              description: "sport",
+            },
           },
+          required: ["name"],
         },
-        required: ["name"],
       },
     ],
   });
@@ -75,7 +77,7 @@ async function main() {
   if (functionCall) {
     const args = JSON.parse(functionCall.arguments || "{}");
 
-    const functionRes = functions[functionCall.name!](args.name);
+    const funcRes = functions[functionCall.name!](args.name);
 
     const res2 = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -84,7 +86,7 @@ async function main() {
         message,
         {
           role: "function",
-          content: functionRes,
+          content: funcRes,
           name: functionCall.name,
         },
       ],
