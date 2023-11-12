@@ -63,7 +63,7 @@ async function main() {
         },
       ],
     });
-    console.log("answer", res2.data.choices[0].message);
+    console.log("answer", res2.choices[0].message);
   }
 }
 
