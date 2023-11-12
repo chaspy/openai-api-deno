@@ -15,8 +15,22 @@ const getLivingCountry = (userName: string) => {
   return userName === "くらにゃん" ? "日本" : "アメリカ";
 };
 
+const getStrongestSportsCountry = (sport: string) => {
+  switch (sport) {
+    case "サッカー":
+      return "アルゼンチン";
+    case "レスリング":
+      return "日本";
+    case "卓球":
+      return "中国";
+    default:
+      return "アメリカ";
+  }
+};
+
 const functions = {
   getLivingCountry,
+  getStrongestSportsCountry,
 } as const;
 
 async function main() {
@@ -38,6 +52,18 @@ async function main() {
           },
           required: ["name"],
         },
+      },
+      {
+        name: "getStrongestSportsCountry",
+        description: "スポーツの強い国を取得",
+        parameters: {
+          type: "object",
+          properties: {
+            type: "string",
+            description: "sport",
+          },
+        },
+        required: ["name"],
       },
     ],
   });
